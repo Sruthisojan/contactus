@@ -17,7 +17,8 @@
     <h1 class="text-center">Contact Us Form</h1>
       
     <div class="container">
-        <form class="was-validated" action="#">
+        <form class="was-validated" method="post">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="fname">Name</label>
                 <input name='name' type="text" id="fname" class="form-control" placeholder="Enter your name" maxlength="100" minlength=3 required>
