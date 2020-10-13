@@ -17,17 +17,17 @@
     <h1 class="text-center">Contact Us Form</h1>
       
     <div class="container">
-        <form class="was-validated" method="post">
+        <form id="user" class="was-validated" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="fname">Name</label>
-                <input name='name' type="text" id="fname" class="form-control" placeholder="Enter your name" maxlength="100" minlength=3 required>
+                <input name='name' type="text" id="name" class="form-control" placeholder="Enter your name" maxlength="100" minlength=3 required>
                 
                 <label for="exampleInputEmail1">E-mail ID</label>
-                <input name='email' class="form-control" id="exampleInputEmail1" placeholder="Enter your e-mail id" aria-describedby="emailHelp" required>
+                <input name='email' class="form-control" id="email1" placeholder="Enter your e-mail id" aria-describedby="emailHelp" required>
                 
                 <label for="phone_no">Phone Number</label>
-                <input type="text" name='num' data-validation="number" data-validation-allowing="negative,number" input name="color" data-validation="number" datavalidation-ignore="$" class="form-control" id="phone_no" placeholder="Phone Number" maxlength="10" minlength=10 pattern="\d*">
+                <input type="text" name='num' data-validation="number" data-validation-allowing="negative,number" input name="color" data-validation="number" datavalidation-ignore="$" class="form-control" id="num" placeholder="Phone Number" maxlength="10" minlength=10 pattern="\d*">
                 
                 <label for="subject">Description</label>
                 <textarea name='subject' class="form-control" id="subject" name="subject" placeholder="Write something.." style="height: 200px" minlength=20 required></textarea>
@@ -43,5 +43,30 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+      
+    <script type="text/javascript">
+        $(document).on('submit','#user',function(e){
+            e.preventDefault();
+            
+            $.ajax({
+                type:'POST',
+                url:'/api/contactus',
+                data:{
+                    
+                    name:$('#name').val(),
+                    email:$('#email').val(),
+                    num:$('#num').val(),
+                    subject:$('#subject').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                    alert("Created new contact successfully.");  
+                }
+            });
+        });
+      </script>
   </body>
+    
 </html>
+
+  
