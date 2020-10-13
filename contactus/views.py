@@ -17,6 +17,13 @@ from contactus.serializers import ContactSerializer
 from rest_framework.decorators import api_view
 # Create your views here.
 
+
+def contact(request):
+    contacts=Contact.objects.all()
+    template='index.html'
+    return render(request,template,{'contactlists':contacts})
+
+
 def index(request):
     if request.method=="POST":
         contactus=Contact()
@@ -29,6 +36,7 @@ def index(request):
         contactus.num=num
         contactus.subject=subject
         contactus.save()
+        context={'contactus':contactus}
     return render(request,'index.html')
 
 @api_view(["GET","POST"])
