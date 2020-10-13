@@ -1,5 +1,5 @@
-#from django.shortcuts import render
-#from .models import Contact
+
+
 #from django.http import HttpResponse
 #from django.shortcuts import get_object_or_404
 #from rest_framework.views import APIView
@@ -16,7 +16,7 @@ from contactus.models import Contact
 from contactus.serializers import ContactSerializer
 from rest_framework.decorators import api_view
 # Create your views here.
-'''
+
 def index(request):
     if request.method=="POST":
         contactus=Contact()
@@ -30,10 +30,9 @@ def index(request):
         contactus.subject=subject
         contactus.save()
     return render(request,'index.html')
-'''
 
 @api_view(["GET","POST"])
-def index(request):
+def contact_us(request):
     if request.method=="GET":
         contactus=Contact.objects.all()
         name=request.GET.get('name',None)
@@ -49,7 +48,7 @@ def index(request):
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-     
-   
+    
+
 
    
