@@ -15,6 +15,8 @@
           <span class="navbar-brand mb-0 h1"></span>
     </nav><br>
     <h1 class="text-center">Contact Us Form</h1>
+      <p id="ds" class="text-success" style="text-align: center"></p>
+      
       
     <div class="container">
         <form id="user" class="was-validated" method="post">
@@ -24,7 +26,7 @@
                 <input name='name' type="text" id="name" class="form-control" placeholder="Enter your name" maxlength="100" minlength=3 required>
                 
                 <label for="exampleInputEmail1">E-mail ID</label>
-                <input name='email' class="form-control" id="email1" placeholder="Enter your e-mail id" aria-describedby="emailHelp" required>
+                <input name='email' class="form-control" id="email" placeholder="Enter your e-mail id" aria-describedby="emailHelp" required>
                 
                 <label for="phone_no">Phone Number</label>
                 <input type="text" name='num' data-validation="number" data-validation-allowing="negative,number" input name="color" data-validation="number" datavalidation-ignore="$" class="form-control" id="num" placeholder="Phone Number" maxlength="10" minlength=10 pattern="\d*">
@@ -59,6 +61,11 @@
                   </tr>
                 
                   {% endfor %}
+                  <tr>
+                      <td id="n1"></td>
+                      <td id="n2"></td>
+                      <td id="n3"></td>
+                  </tr>
               </tbody>
           
           
@@ -77,20 +84,25 @@
             e.preventDefault();
             
             $.ajax({
-                type:'POST',
-                url:'/api/contactus',
+                type:"POST",
+                url:'/create',
                 data:
-                JSON.stringify(
+
                 {
+                    'csrfmiddlewaretoken':'{{csrf_token}}',
+                    name:$('#name').val(),
+                    email:$('#email').val(),
+                    num:$('#num').val(),
+                    subject:$('#subject').val(),
                     
-                    'name':$('#name').val(),
-                    'email':$('#email').val(),
-                    'num':$('#num').val(),
-                    'subject':$('#subject').val(),
-                    'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
-                }),
+                },
                 success:function(response){
-                    alert("Created new contact successfully.");  
+                    document.getElementById('ds').innerHTML="New contact created successfully."  
+                    document.getElementById('n1').innerHTML=$('#name').val()
+                    document.getElementById('n2').innerHTML=$('#email').val()
+                    document.getElementById('n3').innerHTML=$('#num').val()
+                    $('#user').trigger('reset')
+                    
                 }
             });
         });
