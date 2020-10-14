@@ -16,7 +16,7 @@ from contactus.models import Contact
 from contactus.serializers import ContactSerializer
 from rest_framework.decorators import api_view
 from django.http import HttpResponse 
-import requests
+
 # Create your views here.
 
 
