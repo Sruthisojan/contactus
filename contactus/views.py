@@ -11,7 +11,7 @@ from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-
+from django.views.decorators.csrf import csrf_exempt
 from contactus.models import Contact
 from contactus.serializers import ContactSerializer
 from rest_framework.decorators import api_view
@@ -36,9 +36,8 @@ def index(request):
         contactus.num=num
         contactus.subject=subject
         contactus.save()
-        context={'contactus':contactus}
     return render(request,'index.html')
-
+@csrf_exempt
 @api_view(["GET","POST"])
 def contact_us(request):
     if request.method=="GET":
@@ -50,11 +49,22 @@ def contact_us(request):
         return JsonResponse(serializer.data,safe=False)
     
     elif request.method=="POST":
-        contactdata=JSONParser().parse(request)
+        print(request.data)
+        try:
+            contactdata=JSONParser().parse(request)
+        except Exception as e:
+            print(e)
+        
+        print(contactdata)
         serializer=ContactSerializer(data=contactdata)
+        
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
+            print(serializer.data)
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        
+        print (serializer.errors)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
