@@ -28,11 +28,11 @@
                 <label for="exampleInputEmail1">E-mail ID</label>
                 <input name='email' class="form-control" id="email" placeholder="Enter your e-mail id" aria-describedby="emailHelp" required>
                 
-<!--
+
                 <label for="phone_no">Phone Number</label>
                 <input type="text" name='num' input name="color" data-validation="number" datavalidation-ignore="$" class="form-control" id="num" placeholder="Phone Number" maxlength="10" minlength=10 pattern="\d*">
                 
--->
+
                 <label for="subject">Description</label>
                 <textarea name='subject' class="form-control" id="subject" name="subject" placeholder="Write something.." style="height: 200px" minlength=20 required></textarea>
                 
@@ -50,7 +50,7 @@
                   <tr>
                       <th scope="col">Name</th>
                       <th scope="col">E-mail</th>
-<!--                      <th scope="col">Phone No.</th>-->
+                      <th scope="col">Phone No.</th>
                   </tr>
               </thead>
               
@@ -59,14 +59,14 @@
                   <tr>
                       <td>{{contactlist.name}}</td>
                       <td>{{contactlist.email}}</td>
-<!--                      <td>{{contactlist.num}}</td>-->
+                      <td>{{contactlist.num}}</td>
                   </tr>
                 
                   {% endfor %}
                   <tr>
                       <td id="n1"></td>
                       <td id="n2"></td>
-<!--                      <td id="n3"></td>-->
+                      <td id="n3"></td>
                   </tr>
               </tbody>
           
@@ -94,7 +94,7 @@
                     'csrfmiddlewaretoken':'{{csrf_token}}',
                     name:$('#name').val(),
                     email:$('#email').val(),
-//                    num:$('#num').val(),
+                    num:$('#num').val(),
                     subject:$('#subject').val(),
                     
                 },
@@ -102,7 +102,7 @@
                     document.getElementById('ds').innerHTML="New contact created successfully."  
                     document.getElementById('n1').innerHTML=$('#name').val()
                     document.getElementById('n2').innerHTML=$('#email').val()
-//                    document.getElementById('n3').innerHTML=$('#num').val()
+                    document.getElementById('n3').innerHTML=$('#num').val()
                     $('#user').trigger('reset')
                     
                 }

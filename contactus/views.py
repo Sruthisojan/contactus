@@ -45,14 +45,14 @@ def create_user(request):
     if request.method=='POST':
         name= request.POST['name']
         email=request.POST['email']
-#        num=request.POST['num']
+        num=request.POST['num']
         subject=request.POST['subject']
 
         Contact.objects.create(
 
             name=name,
             email=email,
-#            num=num,
+            num=num,
             subject=subject
 
         )
