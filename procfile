@@ -1,1 +1,1 @@
-web: waitress-serve  contactusforms.wsgi:application
+web: gunicorn contactusforms.wsgi 
