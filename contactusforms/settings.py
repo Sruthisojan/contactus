@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 db_from_env=dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-django_heroku.settings(local())
+django_heroku.settings(locals())
 
 
 STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
