@@ -4,7 +4,7 @@ from django.db import models
 class Contact(models.Model):
     name=models.CharField(max_length=100)
     email=models.EmailField()
-    num=models.BigIntegerField()
+    num=models.CharField(max_length=10)
     subject=models.TextField()
     
     class Meta:
